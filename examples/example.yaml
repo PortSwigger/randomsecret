@@ -1,0 +1,9 @@
+apiVersion: noa.re/v1alpha1
+kind: RandomSecret
+metadata:
+  name: my-secrets
+spec:
+  secrets:
+    - name: MY_SECRET_NAME
+      length: 40
+    - name: A_SECRET_WITH_DEFAULT_LENGTH
