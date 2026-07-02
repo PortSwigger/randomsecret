@@ -45,6 +45,16 @@ kubectl apply -f manifests/crd.yaml
 cargo run          # runs against the current kubeconfig context
 ```
 
+## Deploying
+
+The container image is published at `repo.noa.re/randomsecret`. A helm chart
+installing the CRD, the operator Deployment and its RBAC lives in
+[helm/randomsecret](helm/randomsecret):
+
+```sh
+helm install randomsecret helm/randomsecret --namespace randomsecret --create-namespace
+```
+
 Regenerate the CRD manifest after changing the spec types:
 
 ```sh

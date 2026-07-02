@@ -1,0 +1,14 @@
+image:
+  repository: repo.noa.re/randomsecret
+  # defaults to the chart appVersion
+  tag: ""
+  pullPolicy: IfNotPresent
+
+# value for the RUST_LOG environment variable
+logLevel: info
+
+resources: {}
+
+nodeSelector: {}
+tolerations: []
+affinity: {}
