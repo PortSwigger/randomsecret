@@ -1,3 +1,6 @@
+// SPDX-License-Identifier: MIT
+// SPDX-FileCopyrightText: The randomsecret contributors
+
 use rand::{CryptoRng, Rng, RngExt};
 
 /// The base62 alphabet in the ordering used by zqlu

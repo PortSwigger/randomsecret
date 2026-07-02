@@ -1,3 +1,6 @@
+// SPDX-License-Identifier: MIT
+// SPDX-FileCopyrightText: The randomsecret contributors
+
 mod crd;
 mod generate;
 mod reconcile;

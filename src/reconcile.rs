@@ -1,3 +1,6 @@
+// SPDX-License-Identifier: MIT
+// SPDX-FileCopyrightText: The randomsecret contributors
+
 use std::collections::BTreeMap;
 use std::sync::Arc;
 use std::time::Duration;

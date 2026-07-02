@@ -63,3 +63,7 @@ Delete the `RandomSecret` and observe that the `Secret` disappears:
 ```sh
 kubectl delete randomsecret my-secrets
 ```
+
+## License
+
+MIT
