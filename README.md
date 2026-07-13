@@ -23,8 +23,7 @@ namespace with the keys `MY_SECRET_NAME` (40 characters) and
 
 ## Generated values
 
-Values are base62 strings using the alphabet ordering from
-[zqlu](https://github.com/nresare/zqlu) (`0-9`, `A-Z`, `a-z`), with the quirk
+Secrets are made up uppercase and lowercase characters and numbers, with the quirk
 that the first character is never a digit. When `length` is omitted, the value
 is 45 characters: the smallest length that carries at least 256 bits (32
 bytes) of entropy given that the first character is drawn from only the 52
