@@ -1,5 +1,5 @@
 image:
-  repository: repo.noa.re/randomsecret
+  repository: nresare/randomsecret
   # defaults to the chart appVersion
   tag: ""
   pullPolicy: IfNotPresent
