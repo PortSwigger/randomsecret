@@ -14,8 +14,10 @@ const DIGITS: usize = 10;
 /// Default number of characters in a generated value. The first character is
 /// drawn from 52 letters (log2(52) ~ 5.70 bits) and the remaining ones from
 /// the full 62 character alphabet (log2(62) ~ 5.954 bits), so 44 is the
-/// smallest length carrying at least 256 bits of entropy.
-pub const DEFAULT_LENGTH: usize = 44;
+/// smallest length carrying at least 256 bits of entropy. We round that up to
+/// the next multiple of 3 so that Kubernetes' base64 encoding of the value
+/// needs no `=` padding.
+pub const DEFAULT_LENGTH: usize = 45;
 
 /// Generate a random base62 string of `length` characters whose first
 /// character is never a digit.
