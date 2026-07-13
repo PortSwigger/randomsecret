@@ -10,12 +10,21 @@ use serde::{Deserialize, Serialize};
     group = "noa.re",
     version = "v1alpha1",
     kind = "RandomSecret",
-    namespaced
+    namespaced,
+    status = "RandomSecretStatus"
 )]
 pub struct RandomSecretSpec {
     /// The entries of the Secret that this RandomSecret manages. The Secret is
     /// created with the same name and namespace as this resource.
     pub secrets: Vec<SecretEntry>,
+}
+
+#[derive(Serialize, Deserialize, Clone, Debug, Default, JsonSchema, PartialEq)]
+#[serde(rename_all = "camelCase")]
+pub struct RandomSecretStatus {
+    /// The value of `.metadata.generation` that was most recently reconciled.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub observed_generation: Option<i64>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, JsonSchema, PartialEq)]

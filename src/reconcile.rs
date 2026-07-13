@@ -11,6 +11,7 @@ use kube::api::{ObjectMeta, Patch, PatchParams, Resource};
 use kube::runtime::controller::Action;
 use kube::{Api, Client, ResourceExt};
 use rand::{CryptoRng, Rng};
+use serde_json::json;
 use tracing::{info, warn};
 
 use crate::crd::{RandomSecret, RandomSecretSpec};
@@ -87,6 +88,21 @@ pub async fn reconcile(rs: Arc<RandomSecret>, ctx: Arc<Context>) -> Result<Actio
             .await?;
         info!("updated Secret {namespace}/{name}");
     }
+
+    let generation = rs.meta().generation;
+    let observed = rs
+        .status
+        .as_ref()
+        .and_then(|status| status.observed_generation);
+    if observed != generation {
+        let random_secrets = Api::<RandomSecret>::namespaced(ctx.client.clone(), &namespace);
+        let status = json!({ "status": { "observedGeneration": generation } });
+        random_secrets
+            .patch_status(&name, &PatchParams::default(), &Patch::Merge(&status))
+            .await?;
+        info!("updated status of RandomSecret {namespace}/{name} to generation {generation:?}");
+    }
+
     Ok(Action::requeue(Duration::from_secs(300)))
 }
 
