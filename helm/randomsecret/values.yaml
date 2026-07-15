@@ -1,5 +1,5 @@
 image:
-  repository: nresare/randomsecret
+  repository: public.ecr.aws/portswigger-platform/randomsecret
   # defaults to the chart appVersion
   tag: ""
   pullPolicy: IfNotPresent
