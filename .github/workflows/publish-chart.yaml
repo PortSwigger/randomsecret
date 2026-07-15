@@ -13,7 +13,7 @@ concurrency:
 
 env:
   CHART_DIR: helm/randomsecret
-  CHART_REPO: oci://public.ecr.aws/portswigger-platform/randomsecret-helm
+  CHART_REPO: oci://public.ecr.aws/portswigger-platform/charts
 
 jobs:
   publish:
