@@ -1,0 +1,40 @@
+name: Publish Helm chart
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write
+
+concurrency:
+  group: publish-chart-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  CHART_DIR: helm/randomsecret
+  CHART_REPO: oci://public.ecr.aws/q3z6g1h3/randomsecret-helm
+
+jobs:
+  publish:
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v6
+        with:
+          role-to-assume: arn:aws:iam::436027055282:role/product-roles/randomsecret-ecr-publish
+          aws-region: us-east-1
+
+      - name: Log in to Amazon ECR Public
+        run: |
+          aws ecr-public get-login-password --region us-east-1 \
+            | helm registry login --username AWS --password-stdin public.ecr.aws
+
+      - name: Package and push chart
+        run: |
+          chart_package="$(helm package "${CHART_DIR}" --destination "${RUNNER_TEMP}" | awk '{print $NF}')"
+          helm push "${chart_package}" "${CHART_REPO}"
