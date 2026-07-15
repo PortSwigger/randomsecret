@@ -2,6 +2,6 @@ apiVersion: v2
 name: randomsecret
 description: An operator materializing RandomSecret resources into Secrets with randomly generated values
 type: application
-version: 0.1.2
-appVersion: 0.1.2
+version: 0.1.3
+appVersion: 0.1.3
 home: https://github.com/nresare/randomsecret
