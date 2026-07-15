@@ -14,7 +14,7 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  IMAGE: public.ecr.aws/q3z6g1h3/randomsecret
+  IMAGE: public.ecr.aws/portswigger-platform/randomsecret
 
 jobs:
   build:
