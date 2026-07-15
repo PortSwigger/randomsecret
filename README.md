@@ -38,40 +38,16 @@ base64 encoding of the value needs no padding.
 - Existing values are never rotated: reconciliation only generates values for
   keys missing from the `Secret`, and removes keys no longer in the spec.
 
-## Running
+## Deploying with helm
+
+A helm chart installing the CRD, the operator Deployment and its RBAC is
+published to Amazon ECR Public at
+`oci://public.ecr.aws/portswigger-platform/charts/randomsecret`:
 
 ```sh
-kubectl apply -f manifests/crd.yaml
-cargo run          # runs against the current kubeconfig context
-```
-
-## Deploying
-
-The container image is published at `repo.noa.re/randomsecret`. A helm chart
-installing the CRD, the operator Deployment and its RBAC lives in
-[helm/randomsecret](helm/randomsecret):
-
-```sh
-helm install randomsecret helm/randomsecret --namespace randomsecret --create-namespace
-```
-
-Regenerate the CRD manifest after changing the spec types:
-
-```sh
-cargo run -- crd > manifests/crd.yaml
-```
-
-## Trying it out
-
-```sh
-kubectl apply -f examples/example.yaml
-kubectl get secret my-secrets -o json | jq '.data | map_values(@base64d)'
-```
-
-Delete the `RandomSecret` and observe that the `Secret` disappears:
-
-```sh
-kubectl delete randomsecret my-secrets
+helm install randomsecret \
+  oci://public.ecr.aws/portswigger-platform/charts/randomsecret \
+  --namespace randomsecret --create-namespace
 ```
 
 ## License
