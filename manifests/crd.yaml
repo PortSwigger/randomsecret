@@ -5,15 +5,12 @@ metadata:
 spec:
   group: noa.re
   names:
-    categories: []
     kind: RandomSecret
     plural: randomsecrets
-    shortNames: []
     singular: randomsecret
   scope: Namespaced
   versions:
-  - additionalPrinterColumns: []
-    name: v1alpha1
+  - name: v1alpha1
     schema:
       openAPIV3Schema:
         description: Auto-generated derived type for RandomSecretSpec via `CustomResource`
@@ -44,10 +41,20 @@ spec:
             required:
             - secrets
             type: object
+          status:
+            nullable: true
+            properties:
+              observedGeneration:
+                description: The value of `.metadata.generation` that was most recently reconciled.
+                format: int64
+                nullable: true
+                type: integer
+            type: object
         required:
         - spec
         title: RandomSecret
         type: object
     served: true
     storage: true
-    subresources: {}
+    subresources:
+      status: {}
