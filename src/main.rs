@@ -21,7 +21,9 @@ use crate::reconcile::{Context, error_policy, reconcile};
 #[tokio::main]
 async fn main() -> anyhow::Result<()> {
     if std::env::args().nth(1).as_deref() == Some("crd") {
-        print!("{}", serde_yaml::to_string(&RandomSecret::crd())?);
+        let mut crd = serde_json::to_value(RandomSecret::crd())?;
+        crd::prune_empty(&mut crd);
+        print!("{}", serde_yaml::to_string(&crd)?);
         return Ok(());
     }
 
