@@ -41,7 +41,7 @@ jobs:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v6
         with:
-          role-to-assume: arn:aws:iam::436027055282:role/product-roles/randomsecret-ecr-publish
+          role-to-assume: arn:aws:iam::436027055282:role/crossplane/randomsecret-ecr-publish
           aws-region: us-east-1
 
       - name: Log in to Amazon ECR Public
@@ -73,7 +73,7 @@ jobs:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v6
         with:
-          role-to-assume: arn:aws:iam::436027055282:role/product-roles/randomsecret-ecr-publish
+          role-to-assume: arn:aws:iam::436027055282:role/crossplane/randomsecret-ecr-publish
           aws-region: us-east-1
 
       - name: Log in to Amazon ECR Public
